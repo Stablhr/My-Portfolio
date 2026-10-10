@@ -1,0 +1,107 @@
+export const projects = [
+  {
+    id: 1,
+    slug: "fluely",
+    title: "Fluely",
+    category: "Web App",
+    short: "Project-management system with a social media content planner and animated loading screen.",
+    description: "Fluely is a project management tool designed to help teams organize their work and plan social media content efficiently. It features an animated loading screen for a polished first impression.",
+    features: [
+      "Project and task management",
+      "Social media content planner",
+      "Animated loading screen",
+      "Team collaboration features",
+    ],
+    tech: ["React", "Tailwind CSS", "Vercel"], // TODO: Aries to add real features/tech
+    liveUrl: "https://fluely.vercel.app",
+    image: "/images/projects/fluely.png",
+  },
+  {
+    id: 2,
+    slug: "calculator",
+    title: "Calculator",
+    category: "Web App",
+    short: "Frosted-glass scientific calculator with a dark UI.",
+    description: "A modern scientific calculator built with a frosted-glass aesthetic and dark theme. Supports standard and scientific operations with a clean, responsive interface.",
+    features: [
+      "Scientific calculator functions",
+      "Frosted-glass UI with dark theme",
+      "Responsive design",
+      "Keyboard support",
+    ],
+    tech: ["React", "Tailwind CSS", "Vercel"], // TODO: Aries to add real features/tech
+    liveUrl: "https://samson-calculator.vercel.app/",
+    image: "/images/projects/calculator.png",
+  },
+  {
+    id: 3,
+    slug: "todo",
+    title: "To-Do List",
+    category: "Web App",
+    short: "Task manager with a warm cream theme built with React and Tailwind CSS.",
+    description: "A simple yet elegant task management application featuring a warm cream color palette. Built to demonstrate clean state management and responsive design.",
+    features: [
+      "Add, edit, delete tasks",
+      "Mark tasks as complete",
+      "Warm cream theme",
+      "Local storage persistence",
+    ],
+    tech: ["React", "Tailwind CSS", "Vercel"], // TODO: Aries to add real features/tech
+    liveUrl: "https://samson-to-do-list.vercel.app/",
+    image: "/images/projects/todo.png",
+  },
+  {
+    id: 4,
+    slug: "ucjm",
+    title: "UCJM Church Website",
+    category: "Website",
+    short: "Church information website for UCJM.",
+    description: "An informational website for the United Church of Jesus Christ (UCJM) providing details about the church, services, events, and contact information.",
+    features: [
+      "Church information and history",
+      "Service schedules",
+      "Event announcements",
+      "Contact form",
+    ],
+    tech: ["React", "Tailwind CSS", "Vercel"], // TODO: Aries to add real features/tech
+    liveUrl: "https://ucjmwebsite.vercel.app/",
+    image: "/images/projects/ucjm.png",
+  },
+  {
+    id: 5,
+    slug: "grace-glory",
+    title: "Grace & Glory Café",
+    category: "Website",
+    short: "Café site with filterable menu, order cart, mood-based drink picks, FAQ, and validated contact form.",
+    description: "A full-featured café website showcasing a filterable menu (coffee, frappé, milk tea, pastries) with size options and peso pricing. Includes an order cart and checkout flow, a 'What's Your Vibe?' mood-based drink recommendation feature, an FAQ accordion, a validated contact form with character counter, and a gallery carousel.",
+    features: [
+      "Filterable menu by category",
+      "Size options with peso pricing",
+      "Order cart and checkout",
+      "Mood-based drink recommendations",
+      "FAQ accordion",
+      "Validated contact form with character counter",
+      "Gallery carousel",
+    ],
+    tech: ["React", "Tailwind CSS", "Vercel", "EmailJS"], // TODO: Aries to confirm tech stack
+    liveUrl: "https://grace-glory-cafe.vercel.app",
+    image: "/images/projects/grace-glory.png",
+  },
+  {
+    id: 6,
+    slug: "slotheod",
+    title: "SlotHEOD (EOD Report)",
+    category: "Web App",
+    short: "End-of-day report tool for streamlined daily reporting.",
+    description: "SlotHEOD is an end-of-day reporting tool designed to simplify the daily reporting process. It provides a structured way to log and submit end-of-day summaries.",
+    features: [
+      "Structured EOD report forms",
+      "Quick submission workflow",
+      "Report history",
+      "Clean, focused UI",
+    ],
+    tech: ["React", "Tailwind CSS", "Vercel"], // TODO: Aries to add real features/tech
+    liveUrl: "https://slotheod.vercel.app/",
+    image: "/images/projects/slotheod.png",
+  },
+];
