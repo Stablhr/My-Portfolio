@@ -11,7 +11,7 @@ export const Pill = forwardRef(function Pill({
     <button
       ref={ref}
       type="button"
-      className={`pill ${active ? "pill-active" : "hover:text-ink hover:bg-white/5"} ${className}`}
+      className={`pill ${active ? "pill-active" : "hover:text-ink hover:bg-white/10"} ${className}`}
       onClick={onClick}
       {...props}
     >

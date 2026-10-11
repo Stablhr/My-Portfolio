@@ -51,12 +51,12 @@ export function About() {
               <div className="absolute inset-0 bg-gradient-to-r from-blue/30 via-transparent to-transparent rounded-2xl blur-3xl -z-10" aria-hidden="true" />
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br from-blue/20 via-blue-deep/30 to-bg border border-blue/20">
                 <SafeImage
-                  src="/images/profile.jpg"
+                  src="/images/photo-of-me.jpg"
                   alt={`${profile.name} - Web Developer`}
                   initial="AS"
                   className="w-full h-full"
-                  width={480}
-                  height={640}
+                  width={543}
+                  height={764}
                 />
                 {embers.slice(0, emberCount).map((ember, i) => (
                   <div
