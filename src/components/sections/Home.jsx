@@ -1,4 +1,4 @@
-import { MousePointer2, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useTyping } from "../../hooks/useTyping";
 import { useReveal } from "../../hooks/useReveal";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
@@ -92,14 +92,6 @@ export function Home() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          aria-hidden="true"
-          style={{ animation: reduceMotion ? "none" : "bounce 2s infinite" }}
-        >
-          <MousePointer2 className="w-6 h-6 text-ink-dim" />
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent pointer-events-none" aria-hidden="true" />
