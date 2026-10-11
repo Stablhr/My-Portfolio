@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { SiReact, SiJavascript, SiTailwindcss, SiHtml5, SiCss, SiGit, SiGithub, SiVercel, SiFigma } from "react-icons/si";
+import { SiReact, SiJavascript, SiTailwindcss, SiHtml5, SiCss, SiGit, SiGithub, SiVercel, SiVite, SiFigma, SiMongodb, SiSupabase } from "react-icons/si";
 
 // react-icons v5 no longer ships an official VS Code glyph (only VSCodium,
 // which is a different editor), so the official #007ACC logo is served from
@@ -26,7 +26,10 @@ export const skills = [
   // use their light-on-dark variants so the logo stays readable.
   { name: "GitHub", icon: SiGithub, color: "#F2F4F8" },
   { name: "Vercel", icon: SiVercel, color: "#FFFFFF" },
+  { name: "Vite", icon: SiVite, color: "#646CFF" },
   { name: "Figma", icon: SiFigma, color: "#F24E1E" },
+  { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+  { name: "Supabase", icon: SiSupabase, color: "#3FCF8E" },
   { name: "VS Code", icon: VSCodeIcon, color: "#007ACC" },
 ];
 
