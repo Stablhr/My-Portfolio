@@ -81,9 +81,11 @@ export function Home() {
                 <span className="font-medium text-ink">{typedText}</span>
               </div>
 
-              <div className="flex justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 w-full sm:w-auto">
                 <Button
                   variant="primary"
+                  size="lg"
+                  className="w-full sm:w-auto"
                   onClick={scrollToProjects}
                   iconRight={<ArrowRight className="w-5 h-5" />}
                 >
