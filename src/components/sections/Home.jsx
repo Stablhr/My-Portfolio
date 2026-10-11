@@ -36,14 +36,13 @@ export function Home() {
               <div className="relative max-w-md mx-auto lg:mx-0">
                 <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-accent/30 via-accent/10 to-accent/30 border border-accent/30">
                   <SafeImage
-                    src="/images/profile.jpg"
-                    alt={`${profile.name} - Web Developer`}
+                    src="/logo.png"
+                    alt={`${profile.name} logo`}
                     initial="AS"
                     className="w-full h-full"
                     width={400}
                     height={400}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent" aria-hidden="true" />
                 </div>
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 md:w-32 md:h-32 rounded-full bg-accent/20 border border-accent/30 blur-2xl" aria-hidden="true" />
               </div>
