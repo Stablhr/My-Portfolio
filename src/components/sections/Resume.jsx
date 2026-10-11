@@ -124,9 +124,9 @@ export function Resume() {
   return (
     <section id="resume" className="section" aria-labelledby="resume-title">
       <div className="container-main">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 md:mb-14">
           <SectionTitle id="resume-title" eyebrow="RESUME" title="CV" align="left" />
-          <Button variant="primary" onClick={handleDownloadCV} icon={<Download className="w-5 h-5" />}>
+          <Button variant="primary" onClick={handleDownloadCV} icon={<Download className="w-5 h-5" />} className="w-full sm:w-auto">
             Download CV
           </Button>
         </div>
@@ -151,7 +151,7 @@ export function Resume() {
           </div>
 
           <div className="p-4 sm:p-6 md:p-8" style={{ minHeight: "400px" }}>
-            <div className="relative">
+            <div className="relative overflow-x-hidden">
               {renderTabContent()}
             </div>
           </div>
@@ -200,7 +200,7 @@ function TimelineItem({ index, title, subtitle, period, details, current, reduce
         {details && details.length > 0 && (
           <ul className="mt-3 space-y-2 pl-4" role="list">
             {details.map((detail, i) => (
-              <li key={i} className="text-sm text-ink-muted relative pl-2 before:content-['•'] before:absolute before:left-0 before:text-accent">
+              <li key={i} className="text-sm text-ink-muted relative pl-2 before:content-['•'] before:absolute before:left-0 before:text-accent overflow-wrap-anywhere">
                 {detail}
               </li>
             ))}
@@ -240,8 +240,8 @@ function SkillBar({ skill, reduceMotion, visible }) {
   return (
     <div ref={barRef} className="bg-surface-2 border border-line rounded-xl p-4" role="listitem">
       <div className="flex items-center justify-between mb-3">
-        <span className="font-medium text-ink text-sm">{skill.name}</span>
-        <span className="text-sm font-medium text-blue-bright" style={{ opacity: animate ? 1 : 0 }}>
+        <span className="font-medium text-ink text-sm overflow-wrap-anywhere">{skill.name}</span>
+        <span className="text-sm font-medium text-blue-bright flex-shrink-0" style={{ opacity: animate ? 1 : 0 }}>
           {skill.level}%
         </span>
       </div>
@@ -326,9 +326,9 @@ function CertificateCard({ certificate, index, reduceMotion, visible }) {
       <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center">
         <Award className="w-4 h-4 text-accent" aria-hidden="true" />
       </div>
-      <div className="min-w-0 pt-0.5">
-        <h4 className="font-semibold text-ink text-sm">{certificate.title}</h4>
-        <p className="text-sm text-ink-muted mt-0.5">{certificate.issuer}</p>
+      <div className="min-w-0 pt-0.5 overflow-hidden">
+        <h4 className="font-semibold text-ink text-sm overflow-wrap-anywhere">{certificate.title}</h4>
+        <p className="text-sm text-ink-muted mt-0.5 overflow-wrap-anywhere">{certificate.issuer}</p>
         <p className="text-xs text-ink-dim uppercase tracking-wider mt-1">{certificate.date}</p>
       </div>
     </div>
