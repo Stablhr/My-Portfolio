@@ -49,7 +49,7 @@ export function About() {
           >
             <div className="relative max-w-md mx-auto lg:mx-0">
               <div className="absolute inset-0 bg-gradient-to-r from-blue/30 via-transparent to-transparent rounded-2xl blur-3xl -z-10" aria-hidden="true" />
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br from-blue/20 via-blue-deep/30 to-bg">
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br from-blue/10 via-blue-deep/10 to-bg">
                 <SafeImage
                   src="/images/photo-of-me.jpg"
                   alt={`${profile.name} - Web Developer`}
