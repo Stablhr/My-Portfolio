@@ -39,7 +39,7 @@ export function Projects() {
           className="mb-10 md:mb-14"
         />
 
-        <div className="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-2 mb-10 md:mb-14 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0" role="group" aria-label="Project categories">
+        <div className="flex flex-wrap justify-center gap-2 mb-10 md:mb-14" role="group" aria-label="Project categories">
           {CATEGORIES.map((cat) => (
             <Pill
               key={cat}
