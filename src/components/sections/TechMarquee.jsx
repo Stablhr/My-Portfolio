@@ -1,8 +1,8 @@
 import { marqueeSkills } from "../../data/skills";
-import { useOptions } from "../../context/OptionsContext";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 export function TechMarquee() {
-  const { reduceMotion } = useOptions();
+  const reduceMotion = useReducedMotion();
 
   if (reduceMotion) {
     return (

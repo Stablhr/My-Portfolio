@@ -1,8 +1,8 @@
 export function SectionTitle({ id, eyebrow, title, align = "center", className = "" }) {
   return (
-    <header className={`mb-12 ${align === "center" ? "text-center" : align === "left" ? "text-left" : "text-right"} ${className}`}>
+    <header className={`${align === "center" ? "text-center" : align === "left" ? "text-left" : "text-right"} ${className}`}>
       {eyebrow && (
-        <span className="inline-block text-label uppercase tracking-[0.2em] text-ink-muted mb-3">
+        <span className="inline-block text-label uppercase tracking-[0.2em] text-ink-muted mb-2">
           {eyebrow}
         </span>
       )}

@@ -7,14 +7,14 @@ import { Modal } from "../ui/Modal";
 import { Pill } from "../ui/Pill";
 import { Button } from "../ui/Button";
 import { SectionTitle } from "../ui/SectionTitle";
-import { useOptions } from "../../context/OptionsContext";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 const CATEGORIES = ["All", "Web App", "Website", "UI"];
 
 export function Projects() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
-  const { reduceMotion } = useOptions();
+  const reduceMotion = useReducedMotion();
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All") return projects;
@@ -36,15 +36,16 @@ export function Projects() {
           id="projects-title"
           eyebrow="RECAP PROJECT"
           title={String(profile.year)}
-          className="mb-8"
+          className="mb-10 md:mb-14"
         />
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12" role="group" aria-label="Project categories">
+        <div className="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-2 mb-10 md:mb-14 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0" role="group" aria-label="Project categories">
           {CATEGORIES.map((cat) => (
             <Pill
               key={cat}
               active={activeFilter === cat}
               onClick={() => setActiveFilter(cat)}
+              className="flex-shrink-0"
             >
               {cat}
             </Pill>
@@ -52,7 +53,7 @@ export function Projects() {
         </div>
 
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6"
           role="list"
           aria-label="Projects"
         >
@@ -71,7 +72,6 @@ export function Projects() {
           <ProjectModal
             project={selectedProject}
             onClose={handleCloseModal}
-            reduceMotion={reduceMotion}
           />
         )}
 
@@ -105,7 +105,7 @@ function ProjectCard({ project, index, onViewMore, reduceMotion }) {
         <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent" aria-hidden="true" />
       </div>
 
-      <div className="p-5 space-y-3">
+      <div className="p-4 sm:p-5 space-y-3">
         <div className="flex items-center gap-2">
           <span className="text-xs uppercase tracking-wider text-accent font-medium">{project.category}</span>
         </div>
@@ -122,7 +122,7 @@ function ProjectCard({ project, index, onViewMore, reduceMotion }) {
           ))}
         </div>
 
-        <div className="flex items-center gap-3 pt-2 border-t border-line">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2 border-t border-line">
           <Button variant="outline" size="sm" onClick={() => onViewMore(project)} iconRight={<ChevronRight className="w-4 h-4" />}>
             View More
           </Button>
@@ -142,14 +142,13 @@ function ProjectCard({ project, index, onViewMore, reduceMotion }) {
   );
 }
 
-function ProjectModal({ project, onClose, reduceMotion }) {
+function ProjectModal({ project, onClose }) {
   return (
     <Modal
       open={true}
       onClose={onClose}
       title={project.title}
       size="xl"
-      className="max-h-[90vh]"
     >
       <div className="space-y-6">
         <div className="relative aspect-[16/10] rounded-xl overflow-hidden">
@@ -195,7 +194,7 @@ function ProjectModal({ project, onClose, reduceMotion }) {
           </div>
 
           <div className="space-y-4">
-            <div className="bg-surface border border-line rounded-2xl p-5 space-y-4">
+            <div className="bg-surface border border-line rounded-2xl p-4 sm:p-5 space-y-4">
               <h4 className="text-label uppercase tracking-[0.2em] text-ink-muted">PROJECT INFO</h4>
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between">

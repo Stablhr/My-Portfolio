@@ -3,7 +3,6 @@ import { Menu, X, Download } from "lucide-react";
 import { Pill } from "../ui/Pill";
 import { Button } from "../ui/Button";
 import { profile } from "../../data/profile";
-import { useOptions } from "../../context/OptionsContext";
 
 const NAV_ITEMS = [
   { id: "home", label: "Home", href: "#home" },
@@ -16,7 +15,6 @@ const NAV_ITEMS = [
 export function Navbar({ activeSection }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { accent } = useOptions();
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -26,6 +24,15 @@ export function Navbar({ activeSection }) {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen]);
 
   const handleNavClick = (href) => {
     setMobileOpen(false);
@@ -75,7 +82,7 @@ export function Navbar({ activeSection }) {
 
           <button
             type="button"
-            className="md:hidden p-2 text-ink-muted hover:text-ink transition-colors rounded-lg"
+            className="md:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 text-ink-muted hover:text-ink transition-colors rounded-lg"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
@@ -88,16 +95,16 @@ export function Navbar({ activeSection }) {
         {mobileOpen && (
           <div
             id="mobile-menu"
-            className="md:hidden py-4 border-t border-line animate-in slide-in-from-top-2 fade-in-200"
+            className="md:hidden -mx-4 sm:-mx-6 border-t border-line bg-bg/95 backdrop-blur animate-in slide-in-from-top-2 fade-in-200"
             role="navigation"
             aria-label="Mobile menu"
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1 px-4 sm:px-6 py-4">
               {NAV_ITEMS.map((item) => (
                 <button
                   key={item.id}
                   type="button"
-                  className={`pill text-left w-full justify-start ${activeSection === item.id ? "pill-active" : "hover:text-ink hover:bg-white/5"}`}
+                  className={`text-label uppercase tracking-widest px-4 py-3 min-h-11 rounded-full text-left w-full transition-colors ${activeSection === item.id ? "pill-active" : "text-ink-muted hover:text-ink hover:bg-white/5"}`}
                   onClick={() => handleNavClick(item.href)}
                 >
                   {item.label}

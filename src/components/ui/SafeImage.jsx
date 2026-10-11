@@ -29,7 +29,7 @@ export function SafeImage({ src, alt, initial, className = "", width, height, ..
         width={width}
         height={height}
         loading="lazy"
-        className={`w-full h-full object-cover transition-opacity duration-500 ${isLoading ? "opacity-0" : "opacity-100"}`}
+        className={`max-w-full w-full h-full object-cover transition-opacity duration-500 ${isLoading ? "opacity-0" : "opacity-100"}`}
         onLoad={() => setIsLoading(false)}
         onError={() => setHasError(true)}
         {...props}

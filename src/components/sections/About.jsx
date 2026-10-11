@@ -1,12 +1,11 @@
-import { useState, useRef, useEffect } from "react";
-import { MapPin, Briefcase, Clock, CheckCircle } from "lucide-react";
+import { useState } from "react";
+import { MapPin, Briefcase, Clock } from "lucide-react";
 import { useReveal } from "../../hooks/useReveal";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { profile } from "../../data/profile";
 import { skills } from "../../data/skills";
 import { SafeImage } from "../ui/SafeImage";
 import { SectionTitle } from "../ui/SectionTitle";
-import { Card } from "../ui/Card";
-import { useOptions } from "../../context/OptionsContext";
 
 const QUICK_FACTS = [
   { icon: MapPin, label: "Location", value: profile.location },
@@ -18,27 +17,37 @@ const INTERESTS = profile.interests;
 
 export function About() {
   const [hoveredSkill, setHoveredSkill] = useState(null);
-  const { reduceMotion } = useOptions();
+  const reduceMotion = useReducedMotion();
   const [portraitRef, portraitVisible] = useReveal({ threshold: 0.1 });
   const [contentRef, contentVisible] = useReveal({ threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
   const [skillsRef, skillsVisible] = useReveal({ threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
   const [factsRef, factsVisible] = useReveal({ threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
 
-  const emberCount = reduceMotion ? 0 : 8;
+  // Decorative ember positions are generated once, not on every render.
+  const [embers] = useState(() =>
+    Array.from({ length: 8 }).map(() => ({
+      size: 8 + Math.random() * 12,
+      left: 10 + Math.random() * 80,
+      bottom: -10 + Math.random() * 20,
+      delay: Math.random() * 8,
+      duration: 6 + Math.random() * 4,
+    }))
+  );
+  const emberCount = reduceMotion ? 0 : embers.length;
 
   return (
     <section id="about" className="section bg-surface/30" aria-labelledby="about-title">
       <div className="container-main">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start">
           <div
             ref={portraitRef}
-            className="relative sticky top-24 lg:sticky lg:top-32"
+            className="relative lg:sticky lg:top-32"
             style={{
               animation: portraitVisible && !reduceMotion ? "reveal 700ms ease-out forwards" : "none",
               opacity: portraitVisible || reduceMotion ? 1 : 0,
             }}
           >
-            <div className="relative">
+            <div className="relative max-w-md mx-auto lg:mx-0">
               <div className="absolute inset-0 bg-gradient-to-r from-blue/30 via-transparent to-transparent rounded-2xl blur-3xl -z-10" aria-hidden="true" />
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br from-blue/20 via-blue-deep/30 to-bg border border-blue/20">
                 <SafeImage
@@ -49,17 +58,17 @@ export function About() {
                   width={480}
                   height={640}
                 />
-                {Array.from({ length: emberCount }).map((_, i) => (
+                {embers.slice(0, emberCount).map((ember, i) => (
                   <div
                     key={i}
                     className="absolute rounded-full bg-blue-bright/30 blur-sm animate-float-up"
                     style={{
-                      width: `${8 + Math.random() * 12}px`,
-                      height: `${8 + Math.random() * 12}px`,
-                      left: `${10 + Math.random() * 80}%`,
-                      bottom: `${-10 + Math.random() * 20}%`,
-                      animationDelay: `${Math.random() * 8}s`,
-                      animationDuration: `${6 + Math.random() * 4}s`,
+                      width: `${ember.size}px`,
+                      height: `${ember.size}px`,
+                      left: `${ember.left}%`,
+                      bottom: `${ember.bottom}%`,
+                      animationDelay: `${ember.delay}s`,
+                      animationDuration: `${ember.duration}s`,
                     }}
                     aria-hidden="true"
                   />
@@ -70,7 +79,7 @@ export function About() {
 
           <div
             ref={contentRef}
-            className="space-y-10"
+            className="space-y-8"
             style={{
               animation: contentVisible && !reduceMotion ? "reveal 700ms ease-out 150ms forwards" : "none",
               opacity: contentVisible || reduceMotion ? 1 : 0,
@@ -83,7 +92,7 @@ export function About() {
               {profile.name}
             </h1>
 
-            <SectionTitle eyebrow="ABOUT" title="ME" align="left" className="mt-2" />
+            <SectionTitle eyebrow="ABOUT" title="ME" align="left" />
 
             <p className="text-ink-muted text-lg leading-relaxed max-w-2xl">
               {profile.bio}
@@ -106,13 +115,13 @@ export function About() {
                     key={skill.name}
                     type="button"
                     role="listitem"
-                    className="relative group w-14 h-14 md:w-16 md:h-16 rounded-xl bg-surface-2 border border-line flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:border-blue/50"
+                    className="relative group w-16 h-16 rounded-xl bg-surface-2 border border-line flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:border-blue/50"
                     onMouseEnter={() => setHoveredSkill(skill)}
                     onMouseLeave={() => setHoveredSkill(null)}
                     aria-label={skill.name}
                   >
                     <skill.icon
-                      className="w-7 h-7 md:w-8 md:h-8 transition-transform duration-300 group-hover:scale-110"
+                      className="w-8 h-8 transition-transform duration-300 group-hover:scale-110"
                       style={{ color: skill.color }}
                       aria-hidden="true"
                     />
@@ -142,16 +151,16 @@ export function About() {
 
             <div
               ref={factsRef}
-              className="grid grid-cols-3 gap-4 pt-4 border-t border-line"
+              className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 border-t border-line"
               style={{
                 animation: factsVisible && !reduceMotion ? "reveal 700ms ease-out 450ms forwards" : "none",
                 opacity: factsVisible || reduceMotion ? 1 : 0,
               }}
             >
-              {QUICK_FACTS.map((fact, i) => (
+              {QUICK_FACTS.map((fact) => (
                 <div key={fact.label} className="text-center">
                   <div className="flex items-center justify-center gap-2 text-ink-muted mb-1">
-                    <fact.icon className="w-5 h-5" aria-hidden="true" />
+                    <fact.icon className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
                     <span className="text-label uppercase tracking-[0.1em]">{fact.label}</span>
                   </div>
                   <p className="text-ink font-medium text-sm">{fact.value}</p>

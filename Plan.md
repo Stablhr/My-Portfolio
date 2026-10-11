@@ -1,7 +1,7 @@
 # Plan.md — Aries B. Samson E-Portfolio
 
 > Implementation plan for a ReactJS + Tailwind CSS portfolio website.
-> Companion files: `DESIGN.md` (visual system) and `OPENCODE_PROMPT.md` (build prompt).
+> Companion files: `DESIGN_1.md` (visual system) and `OPENCODE_PROMPT.md` (build prompt).
 
 ---
 
@@ -15,9 +15,9 @@ Build a personal e-portfolio for **Aries B. Samson** that meets the course requi
 | Tailwind CSS for styling, layout, responsive design | Tailwind v4 with design tokens in `@theme`, mobile-first breakpoints |
 | React state and event handling | `useState`, `useEffect`, `useRef`, controlled form inputs, click and scroll handlers |
 | Required sections | Home, About Me, Projects, Resume/CV, Contact (details in section 4) |
-| At least 3 interactive features | 8 planned (section 5), well above the minimum |
+| At least 3 interactive features | 6 planned (section 5), well above the minimum |
 
-**Design direction:** a dark, cinematic "game menu" portfolio (from the reference screenshot): deep black with a blue radial glow, a red accent, bold condensed headings, pill navigation, and a Start / Options / Exit intro. Layout rhythm borrows from https://joenelseve.vercel.app/ (tech marquee, project cards with a "Project Details" action, a scrolling image strip, process steps).
+**Design direction:** a dark, cinematic portfolio (from the reference screenshot): deep black with a blue radial glow, a red accent, bold condensed headings, and pill navigation. Layout rhythm borrows from https://joenelseve.vercel.app/ (tech marquee, project cards with a "Project Details" action, a scrolling image strip, process steps).
 
 ---
 
@@ -51,7 +51,7 @@ aries-portfolio/
 │  ├─ data/
 │  │  ├─ profile.js                # name, role, bio, socials, email
 │  │  ├─ projects.js               # the 6 projects
-│  │  ├─ resume.js                 # education, experience, skills
+│  │  ├─ resume.js                 # experience, skills, languages
 │  │  └─ skills.js                 # tech list for marquee and About
 │  ├─ hooks/
 │  │  ├─ useScrollSpy.js           # active section for nav pills
@@ -61,11 +61,11 @@ aries-portfolio/
 │  │  ├─ layout/  Navbar.jsx, Footer.jsx, BackgroundGlow.jsx
 │  │  ├─ ui/      Button.jsx, Pill.jsx, SectionTitle.jsx, Card.jsx, Modal.jsx, Toast.jsx
 │  │  └─ sections/
-│  │     ├─ Home.jsx               # start-menu hero
+│  │     ├─ Home.jsx               # hero + marquee
 │  │     ├─ About.jsx
 │  │     ├─ Projects.jsx           # filter, grid, modal
 │  │     ├─ Resume.jsx             # tabs and Download CV
-│  │     └─ Contact.jsx            # links, form, thank-you panel
+│  │     └─ Contact.jsx            # links, validated form, success state
 └─ README.md
 ```
 
@@ -80,7 +80,7 @@ All content lives in `src/data/*.js`. Components never hardcode personal info, s
 - Hero (cover-slide style): circular/rounded photo cropped into a red shape on the left, giant **"PORTFOLIO"** heading with year **2026** to the right.
 - Welcome message: "Hello, I'm Aries B. Samson", animated typed role line (e.g. *Web Developer · Front-End · UI Builder*).
 - Short introduction (2 to 3 lines).
-- **Game menu**: `START` (scrolls to About), `OPTIONS` (opens options panel), `EXIT` (opens a friendly "Thanks for visiting" modal with a Contact shortcut). Keyboard accessible (arrow keys and Enter).
+- A single **View Projects** button that scrolls to the Projects section.
 - Tech marquee strip under the hero (infinite scroll, pause on hover).
 
 ### 4.2 About Me
@@ -109,8 +109,7 @@ Six real projects (data in `projects.js`):
 - Screenshots: use `public/images/projects/<slug>.png`; if the file is missing, render a gradient placeholder with the project initial (no broken images).
 
 ### 4.4 Resume / CV
-- Tabs: **Education · Experience · Skills** (state-driven, animated panel switch).
-- Education timeline (placeholder entries until the user supplies real ones).
+- Tabs: **Experience · Skills** (state-driven panel switch; Experience is the default).
 - Experience timeline (projects count as experience if no jobs yet).
 - Skills with animated proficiency bars (animate when scrolled into view) and a languages block like the reference (e.g. Filipino / English with percentage bars).
 - **Download CV** button: downloads `/Aries_Samson_CV.pdf` and shows a toast "CV download started".
@@ -121,22 +120,20 @@ Six real projects (data in `projects.js`):
   - Validation: required fields, email regex, minimum message length (10), inline error messages, disabled submit while sending.
   - Success state: replace form with "Thank you" panel + "Send another" button.
   - Delivery: EmailJS if `VITE_EMAILJS_*` env vars exist; otherwise open `mailto:`.
-- Closing "THANK YOU 2026" banner in the style of the reference's last slide, then footer.
+- The page closes cleanly: the Contact section is followed directly by the footer.
 
 ---
 
-## 5. Interactive React Features (≥ 3 required, 8 planned)
+## 5. Interactive React Features (≥ 3 required, 6 planned)
 
 | # | Feature | React concepts |
 |---|---|---|
 | 1 | **Project filter and View More modal** (show/hide details) | `useState` (filter, selected project), conditional rendering, derived list |
 | 2 | **Contact form with validation** and success state | controlled inputs, `onChange`/`onSubmit`, error state object, conditional rendering |
 | 3 | **Download CV** button with toast | event handler, `useState`, timed `useEffect` |
-| 4 | **Start / Options / Exit** game menu with keyboard control | `useState`, `onKeyDown`, modal, `useRef` |
-| 5 | **Options panel**: accent color switch (red/blue/green) and reduce-motion toggle | state lifted to `App`, CSS variables set on `<html>` |
-| 6 | **Resume tabs** + animated skill bars | `useState`, `IntersectionObserver` |
-| 7 | **Scroll-spy navbar** and mobile hamburger menu | `useEffect`, custom hook, conditional classes |
-| 8 | **Typed role text**, scroll-reveal animations, back-to-top button | custom hooks, Tailwind transitions |
+| 4 | **Resume tabs** + animated skill bars | `useState`, `IntersectionObserver` |
+| 5 | **Scroll-spy navbar** and mobile hamburger menu | `useEffect`, custom hook, conditional classes |
+| 6 | **Typed role text**, scroll-reveal animations, back-to-top button | custom hooks, Tailwind transitions |
 
 ---
 
@@ -154,10 +151,10 @@ Each phase ends with `npm run dev` working and no console errors.
 5. Build UI primitives, `BackgroundGlow`, `Navbar` (with scroll-spy and mobile menu), `Footer`
 
 **Phase 2: Sections**
-6. `Home` (hero, menu, marquee), then `About`
+6. `Home` (hero, marquee), then `About`
 7. `Projects` (cards, filter, modal, placeholder images)
 8. `Resume` (tabs, timelines, bars, Download CV)
-9. `Contact` (links, validated form, success state, thank-you banner)
+9. `Contact` (links, validated form, success state)
 
 **Phase 3: Polish**
 10. Reveal animations, hover states, focus rings, `prefers-reduced-motion` support
@@ -181,7 +178,7 @@ Each phase ends with `npm run dev` working and no console errors.
 - [ ] All six project links open correctly in a new tab
 - [ ] Contact form blocks invalid input and shows clear errors
 - [ ] Download CV triggers a file download
-- [ ] Keyboard-only navigation works (menu, modal with Esc to close, form)
+- [ ] Keyboard-only navigation works (mobile menu, modal with Esc to close, form)
 - [ ] No broken images (placeholders used where files are missing)
 - [ ] Lighthouse: Performance ≥ 85, Accessibility ≥ 90
 - [ ] No hardcoded personal info outside `src/data/`
@@ -193,7 +190,7 @@ Each phase ends with `npm run dev` working and no console errors.
 1. **Profile photo** (portrait, ideally with plain background) → `public/images/profile.jpg`
 2. **CV PDF** → `public/Aries_Samson_CV.pdf`
 3. **Project screenshots** (1280×720 or similar) → `public/images/projects/`
-4. **Education** (school, course, years) and **experience** details
+4. **Experience** details and **skill levels**
 5. Your **skill levels** and **interests**
 6. A confirmed **email address**: your message had `ariessamson18@gmail.om`; this plan uses `ariessamson18@gmail.com`, so please confirm
 7. Optional: EmailJS service ID, template ID and public key for a real contact form
@@ -204,6 +201,6 @@ Each phase ends with `npm run dev` working and no console errors.
 
 - **Dark design and contrast:** keep body text at ≥ 4.5:1 against the background; never put small gray text on the blue glow.
 - **Heavy visuals:** the glow and particles are pure CSS (no large images), so performance stays good.
-- **Motion:** respect `prefers-reduced-motion` and the in-app reduce-motion option.
+- **Motion:** respect the browser `prefers-reduced-motion` setting.
 - **Do not copy** the reference portfolios' text, photos or branding: use only the *layout ideas and mood*. All content is Aries's own.
 - **Single page vs. multi-page:** single page chosen for simplicity; routing can be added later if needed.

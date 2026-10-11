@@ -1,25 +1,22 @@
 import { useState, useRef, useEffect } from "react";
-import { Download, GraduationCap, Briefcase, Code, Languages, ChevronRight, Check } from "lucide-react";
+import { Download, Briefcase, Code, Check } from "lucide-react";
 import { resume } from "../../data/resume";
 import { profile } from "../../data/profile";
-import { Card } from "../ui/Card";
 import { Button } from "../ui/Button";
 import { SectionTitle } from "../ui/SectionTitle";
 import { useReveal } from "../../hooks/useReveal";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { Toast } from "../ui/Toast";
-import { useOptions } from "../../context/OptionsContext";
 
 const TABS = [
-  { id: "education", label: "Education", icon: GraduationCap },
   { id: "experience", label: "Experience", icon: Briefcase },
   { id: "skills", label: "Skills", icon: Code },
 ];
 
 export function Resume() {
-  const [activeTab, setActiveTab] = useState("education");
+  const [activeTab, setActiveTab] = useState("experience");
   const [showToast, setShowToast] = useState(false);
-  const { reduceMotion } = useOptions();
-  const [educationRef, educationVisible] = useReveal({ threshold: 0.1 });
+  const reduceMotion = useReducedMotion();
   const [experienceRef, experienceVisible] = useReveal({ threshold: 0.1 });
   const [skillsRef, skillsVisible] = useReveal({ threshold: 0.1 });
   const [languagesRef, languagesVisible] = useReveal({ threshold: 0.1 });
@@ -37,24 +34,6 @@ export function Resume() {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "education":
-        return (
-          <div ref={educationRef} className="space-y-6" role="tabpanel" aria-labelledby="education-tab">
-            {resume.education.map((edu, i) => (
-              <TimelineItem
-                key={edu.id}
-                index={i}
-                title={edu.course}
-                subtitle={edu.school}
-                period={edu.period}
-                details={edu.details}
-                icon={GraduationCap}
-                reduceMotion={reduceMotion}
-                visible={educationVisible}
-              />
-            ))}
-          </div>
-        );
       case "experience":
         return (
           <div ref={experienceRef} className="space-y-6" role="tabpanel" aria-labelledby="experience-tab">
@@ -66,7 +45,6 @@ export function Resume() {
                 subtitle={exp.company}
                 period={exp.period}
                 details={exp.details}
-                icon={Briefcase}
                 current={exp.current}
                 reduceMotion={reduceMotion}
                 visible={experienceVisible}
@@ -80,11 +58,10 @@ export function Resume() {
             <div>
               <h3 className="text-label uppercase tracking-[0.2em] text-ink-muted mb-6">TECHNICAL SKILLS</h3>
               <div className="grid sm:grid-cols-2 gap-4" role="list" aria-label="Technical skills">
-                {resume.skills.map((skill, i) => (
+                {resume.skills.map((skill) => (
                   <SkillBar
                     key={skill.name}
                     skill={skill}
-                    index={i}
                     reduceMotion={reduceMotion}
                     visible={skillsVisible}
                   />
@@ -95,11 +72,10 @@ export function Resume() {
             <div ref={languagesRef} className="pt-8 border-t border-line">
               <h3 className="text-label uppercase tracking-[0.2em] text-ink-muted mb-6">LANGUAGES</h3>
               <div className="space-y-4" role="list" aria-label="Languages">
-                {resume.languages.map((lang, i) => (
+                {resume.languages.map((lang) => (
                   <LanguageBar
                     key={lang.name}
                     language={lang}
-                    index={i}
                     reduceMotion={reduceMotion}
                     visible={languagesVisible}
                   />
@@ -116,15 +92,15 @@ export function Resume() {
   return (
     <section id="resume" className="section" aria-labelledby="resume-title">
       <div className="container-main">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-          <SectionTitle eyebrow="RESUME" title="CV" align="left" />
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14">
+          <SectionTitle id="resume-title" eyebrow="RESUME" title="CV" align="left" />
           <Button variant="primary" onClick={handleDownloadCV} icon={<Download className="w-5 h-5" />}>
             Download CV
           </Button>
         </div>
 
         <div className="bg-surface border border-line rounded-2xl overflow-hidden">
-          <div className="flex flex-wrap bg-surface-2 border-b border-line" role="tablist" aria-label="Resume sections">
+          <div className="flex bg-surface-2 border-b border-line" role="tablist" aria-label="Resume sections">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
@@ -134,7 +110,7 @@ export function Resume() {
                 aria-controls={tab.id}
                 tabIndex={activeTab === tab.id ? 0 : -1}
                 onClick={() => setActiveTab(tab.id)}
-                className={`pill px-6 py-3 text-base ${activeTab === tab.id ? "pill-active" : "text-ink-muted hover:text-ink hover:bg-white/5"}`}
+                className={`pill flex-1 sm:flex-none inline-flex items-center justify-center min-h-11 px-6 py-3 text-base ${activeTab === tab.id ? "pill-active" : "text-ink-muted hover:text-ink hover:bg-white/5"}`}
               >
                 <tab.icon className="w-4 h-4 mr-2" aria-hidden="true" />
                 {tab.label}
@@ -142,8 +118,8 @@ export function Resume() {
             ))}
           </div>
 
-          <div className="p-6 md:p-8" style={{ minHeight: "400px" }}>
-            <div className="relative" role="tabpanel" aria-labelledby={`${activeTab}-tab`}>
+          <div className="p-4 sm:p-6 md:p-8" style={{ minHeight: "400px" }}>
+            <div className="relative">
               {renderTabContent()}
             </div>
           </div>
@@ -155,16 +131,16 @@ export function Resume() {
   );
 }
 
-function TimelineItem({ index, title, subtitle, period, details, icon: Icon, current, reduceMotion, visible }) {
+function TimelineItem({ index, title, subtitle, period, details, current, reduceMotion, visible }) {
   return (
     <div
-      className="relative flex gap-6"
+      className="relative flex gap-4 sm:gap-6"
       style={{
         animation: visible && !reduceMotion ? `reveal 700ms ease-out ${index * 100}ms forwards` : "none",
         opacity: visible || reduceMotion ? 1 : 0,
       }}
     >
-      <div className="relative flex-shrink-0 w-12">
+      <div className="relative flex-shrink-0 w-8 sm:w-12">
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-line" aria-hidden="true" />
         <div
           className={`relative w-4 h-4 rounded-full border-2 border-line flex items-center justify-center z-10 ${current ? "bg-accent border-accent" : "bg-surface border-blue-bright"}`}
@@ -203,7 +179,7 @@ function TimelineItem({ index, title, subtitle, period, details, icon: Icon, cur
   );
 }
 
-function SkillBar({ skill, index, reduceMotion, visible }) {
+function SkillBar({ skill, reduceMotion, visible }) {
   const [animate, setAnimate] = useState(false);
   const barRef = useRef(null);
 
@@ -230,7 +206,7 @@ function SkillBar({ skill, index, reduceMotion, visible }) {
   }, [visible, animate]);
 
   return (
-    <div ref={barRef} className="bg-surface-2 border border-line rounded-xl p-5" role="listitem">
+    <div ref={barRef} className="bg-surface-2 border border-line rounded-xl p-4 sm:p-5" role="listitem">
       <div className="flex items-center justify-between mb-3">
         <span className="font-medium text-ink">{skill.name}</span>
         <span className="text-sm font-medium text-blue-bright" style={{ opacity: animate ? 1 : 0 }}>
@@ -255,7 +231,7 @@ function SkillBar({ skill, index, reduceMotion, visible }) {
   );
 }
 
-function LanguageBar({ language, index, reduceMotion, visible }) {
+function LanguageBar({ language, reduceMotion, visible }) {
   const [animate, setAnimate] = useState(false);
   const barRef = useRef(null);
 
@@ -283,7 +259,7 @@ function LanguageBar({ language, index, reduceMotion, visible }) {
 
   return (
     <div ref={barRef} className="flex items-center gap-4" role="listitem">
-      <div className="w-24 text-sm font-medium text-ink">{language.name}</div>
+      <div className="w-20 sm:w-24 text-sm font-medium text-ink flex-shrink-0">{language.name}</div>
       <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
         <div
           className="h-full rounded-full bg-gradient-to-r from-blue to-blue-bright"
@@ -298,7 +274,7 @@ function LanguageBar({ language, index, reduceMotion, visible }) {
           aria-label={`${language.name} proficiency`}
         />
       </div>
-      <span className="text-sm font-medium text-blue-bright w-12 text-right" style={{ opacity: animate ? 1 : 0 }}>
+      <span className="text-sm font-medium text-blue-bright w-12 text-right flex-shrink-0" style={{ opacity: animate ? 1 : 0 }}>
         {language.level}%
       </span>
     </div>

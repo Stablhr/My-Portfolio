@@ -73,6 +73,7 @@ export function Footer() {
               type="button"
               onClick={scrollToTop}
               className="fixed bottom-6 right-6 md:static p-3 bg-surface border border-line rounded-full text-ink-muted hover:text-ink hover:border-blue/50 transition-all duration-300 shadow-[0_20px_60px_-20px_rgba(27,111,168,.45)]"
+              style={{ bottom: "max(1.5rem, env(safe-area-inset-bottom))", right: "max(1.5rem, env(safe-area-inset-right))" }}
               aria-label="Back to top"
             >
               <ArrowUp className="w-5 h-5" aria-hidden="true" />

@@ -64,7 +64,7 @@ export function Modal({ open, onClose, title, children, className = "", size = "
   const modalContent = (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in-200"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in-200"
       onClick={(e) => {
         if (e.target === overlayRef.current) onClose();
       }}
@@ -75,10 +75,11 @@ export function Modal({ open, onClose, title, children, className = "", size = "
       <div
         ref={contentRef}
         tabIndex={-1}
-        className={`w-full ${sizes[size]} bg-surface-2 border border-line rounded-2xl shadow-[0_20px_60px_-20px_rgba(27,111,168,.45)] animate-in zoom-in-95 fade-in-200`}
+        className={`w-full ${sizes[size]} bg-surface-2 border border-line rounded-t-2xl sm:rounded-2xl shadow-[0_20px_60px_-20px_rgba(27,111,168,.45)] animate-in zoom-in-95 fade-in-200 flex flex-col max-h-[90svh] ${className}`}
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         {(title || onClose) && (
-          <header className="flex items-center justify-between p-6 border-b border-line">
+          <header className="sticky top-0 z-10 flex items-center justify-between gap-4 p-4 sm:p-6 border-b border-line bg-surface-2 rounded-t-2xl">
             {title && (
               <h3 id="modal-title" className="text-xl font-heading text-chrome">
                 {title}
@@ -87,7 +88,7 @@ export function Modal({ open, onClose, title, children, className = "", size = "
             {onClose && (
               <button
                 type="button"
-                className="p-2 text-ink-muted hover:text-ink transition-colors rounded-lg hover:bg-white/5"
+                className="flex-shrink-0 inline-flex items-center justify-center w-11 h-11 text-ink-muted hover:text-ink transition-colors rounded-lg hover:bg-white/5"
                 onClick={onClose}
                 aria-label="Close modal"
               >
@@ -96,7 +97,7 @@ export function Modal({ open, onClose, title, children, className = "", size = "
             )}
           </header>
         )}
-        <div className="p-6 max-h-[70vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1 overscroll-contain">
           {children}
         </div>
       </div>

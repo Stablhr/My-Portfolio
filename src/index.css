@@ -11,7 +11,7 @@
   --color-blue: #1B6FA8;
   --color-blue-deep: #0A2A44;
   --color-blue-bright: #6CC4FF;
-  --color-accent: var(--accent, #D4162B);
+  --color-accent: #D4162B;
   --color-accent-hover: #F0344A;
   --color-success: #3DDC97;
   --color-danger: #FF5D6C;
@@ -87,22 +87,21 @@
   }
 }
 
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-  html[data-motion="reduced"] *,
-  html[data-motion="reduced"] *::before,
-  html[data-motion="reduced"] *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
   @media (prefers-reduced-motion: reduce) {
-    html:not([data-motion="normal"]) *,
-    html:not([data-motion="normal"]) *::before,
-    html:not([data-motion="normal"]) *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -140,7 +139,7 @@
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   .section {
-    @apply py-20 md:py-28 scroll-mt-24;
+    @apply py-16 sm:py-20 lg:py-28 scroll-mt-24;
   }
   .section-title {
     @apply font-heading uppercase tracking-wide leading-[0.95] text-chrome;
@@ -182,9 +181,43 @@
     @apply bg-blue-bright/90 text-black;
   }
   .input-field {
-    @apply w-full bg-bg/60 border border-line rounded-xl px-4 py-3 text-ink placeholder-ink-dim transition-all duration-200 focus:ring-2 focus:ring-blue-bright/60 focus:border-transparent focus:outline-none;
+    @apply w-full bg-bg/60 border border-line rounded-xl px-4 py-3 text-base text-ink placeholder-ink-dim transition-all duration-200 focus:ring-2 focus:ring-blue-bright/60 focus:border-transparent focus:outline-none;
   }
   .link-external {
     @apply inline-flex items-center gap-1.5 text-ink-muted hover:text-blue-bright transition-colors;
+  }
+}
+
+/*
+ * Custom cursor: an arrow pointer in the red accent (#D4162B) with a thin
+ * white outline, derived from the old hero caret. Pure CSS data-URI SVG (no JS
+ * follower), so it never lags. Desktop pointers only; touch keeps the default.
+ * `auto`/`pointer` fallbacks keep the cursor visible if the SVG fails to load.
+ */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M4 3 L4 22 L9.2 16.9 L12.4 24.8 L15.8 23.4 L12.6 15.6 L20 15.6 Z' fill='%23D4162B' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 3, auto;
+  }
+  a,
+  button,
+  [role="button"],
+  summary,
+  label[for],
+  .cursor-pointer {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 28 28'%3E%3Cpath d='M4 3 L4 22 L9.2 16.9 L12.4 24.8 L15.8 23.4 L12.6 15.6 L20 15.6 Z' fill='%23F0344A' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 3, pointer;
+  }
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+  button:disabled,
+  input:disabled,
+  textarea:disabled,
+  select:disabled,
+  [disabled],
+  [aria-disabled="true"] {
+    cursor: not-allowed;
   }
 }

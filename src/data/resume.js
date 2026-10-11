@@ -1,25 +1,4 @@
 export const resume = {
-  education: [
-    {
-      id: 1,
-      school: "TODO: University/College Name",
-      course: "TODO: Course/Degree (e.g., BS Computer Science)",
-      period: "TODO: Year - Year (e.g., 2020 - 2024)",
-      details: [
-        "TODO: Relevant coursework, achievements, or honors",
-        "TODO: Capstone project or thesis title",
-      ],
-    },
-    {
-      id: 2,
-      school: "TODO: High School Name",
-      course: "TODO: Track/Strand (e.g., STEM, ICT)",
-      period: "TODO: Year - Year",
-      details: [
-        "TODO: Notable achievements or activities",
-      ],
-    },
-  ],
   experience: [
     {
       id: 1,

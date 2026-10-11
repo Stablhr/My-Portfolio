@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Mail, Send, Check, Loader2, MessageSquare, Briefcase } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { profile } from "../../data/profile";
@@ -6,7 +6,7 @@ import { SectionTitle } from "../ui/SectionTitle";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
 import { useReveal } from "../../hooks/useReveal";
-import { useOptions } from "../../context/OptionsContext";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 const SOCIAL_LINKS = [
   { name: "Email", icon: Mail, href: `mailto:${profile.email}`, handle: profile.email, color: "#D44638" },
@@ -33,12 +33,10 @@ export function Contact() {
   const [formData, setFormData] = useState(initialFormState);
   const [errors, setErrors] = useState(initialErrors);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState("idle");
   const [showSuccess, setShowSuccess] = useState(false);
-  const { reduceMotion } = useOptions();
+  const reduceMotion = useReducedMotion();
   const [leftRef, leftVisible] = useReveal({ threshold: 0.1 });
   const [rightRef, rightVisible] = useReveal({ threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
-  const [thanksRef, thanksVisible] = useReveal({ threshold: 0.1 });
   const messageLength = formData.message.length;
 
   const validateField = (name, value) => {
@@ -89,7 +87,6 @@ export function Contact() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setSubmitStatus("sending");
 
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -115,12 +112,10 @@ export function Contact() {
         window.location.href = mailtoLink;
       }
 
-      setSubmitStatus("success");
       setShowSuccess(true);
       setFormData(initialFormState);
     } catch (error) {
       console.error("Failed to send message:", error);
-      setSubmitStatus("error");
       setErrors({ ...errors, form: "Failed to send message. Please try again." });
     } finally {
       setIsSubmitting(false);
@@ -129,15 +124,14 @@ export function Contact() {
 
   const handleSendAnother = () => {
     setShowSuccess(false);
-    setSubmitStatus("idle");
   };
 
   return (
     <section id="contact" className="section" aria-labelledby="contact-title">
       <div className="container-main">
-        <SectionTitle id="contact-title" eyebrow="GET IN TOUCH" title="CONTACT ME" className="mb-12" />
+        <SectionTitle id="contact-title" eyebrow="GET IN TOUCH" title="CONTACT ME" className="mb-10 md:mb-14" />
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
           <div
             ref={leftRef}
             className="space-y-8"
@@ -147,7 +141,7 @@ export function Contact() {
             }}
           >
             <div className="space-y-4">
-              {SOCIAL_LINKS.map((social, i) => (
+              {SOCIAL_LINKS.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
@@ -193,7 +187,7 @@ export function Contact() {
               opacity: rightVisible || reduceMotion ? 1 : 0,
             }}
           >
-            <Card className="p-6 md:p-8">
+            <Card className="p-4 sm:p-6 md:p-8">
               {showSuccess ? (
                 <div className="text-center py-12" role="status" aria-live="polite">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-success/20 flex items-center justify-center">
@@ -329,19 +323,6 @@ export function Contact() {
               )}
             </Card>
           </div>
-        </div>
-
-        <div
-          ref={thanksRef}
-          className="mt-20 text-center"
-          style={{
-            animation: thanksVisible && !reduceMotion ? "reveal 700ms ease-out forwards" : "none",
-            opacity: thanksVisible || reduceMotion ? 1 : 0,
-          }}
-        >
-          <p className="font-heading text-chrome tracking-wide" style={{ fontSize: "clamp(3rem, 8vw, 6rem)" }}>
-            THANK YOU 2026
-          </p>
         </div>
       </div>
     </section>
