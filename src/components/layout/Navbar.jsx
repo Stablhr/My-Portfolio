@@ -60,7 +60,8 @@ export function Navbar({ activeSection }) {
       <nav className="container-main" aria-label="Primary navigation">
         <div className="flex items-center justify-between h-16 md:h-20">
           <a href="#home" className="text-xl font-bold text-ink" aria-label="Aries B. Samson - Home">
-            AS
+            <span className="md:hidden">Aries Samson</span>
+            <span className="hidden md:inline">AS</span>
           </a>
 
           <div className="hidden md:flex items-center gap-4">

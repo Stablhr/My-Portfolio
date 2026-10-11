@@ -64,7 +64,7 @@ export function Home() {
               <h1
                 id="home-title"
                 className="font-heading text-chrome leading-[0.95] tracking-wide mb-4"
-                style={{ fontSize: "clamp(3rem, 14vw, 9rem)" }}
+                style={{ fontSize: "clamp(3rem, 8vw, 9rem)" }}
               >
                 PORTFOLIO
               </h1>
