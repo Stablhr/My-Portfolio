@@ -34,7 +34,7 @@ export function Home() {
               }}
             >
               <div className="relative max-w-md mx-auto lg:mx-0">
-                <div className="relative aspect-square rounded-2xl overflow-hidden border border-accent/30">
+                <div className="relative aspect-square rounded-2xl overflow-hidden">
                   <SafeImage
                     src="/logo.png"
                     alt={`${profile.name} logo`}
