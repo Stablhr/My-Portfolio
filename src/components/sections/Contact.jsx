@@ -1,8 +1,7 @@
-import { Mail, MessageSquare, Briefcase } from "lucide-react";
+import { Mail } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { profile } from "../../data/profile";
 import { SectionTitle } from "../ui/SectionTitle";
-import { Button } from "../ui/Button";
 import { useReveal } from "../../hooks/useReveal";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
@@ -52,21 +51,6 @@ export function Contact() {
                 </div>
               </a>
             ))}
-          </div>
-
-          <div className="pt-6 border-t border-line">
-            <h3 className="text-label uppercase tracking-[0.2em] text-ink-muted mb-4 text-center">QUICK LINKS</h3>
-            <div className="flex flex-wrap justify-center gap-2">
-              <Button variant="outline" size="sm" href="#projects" icon={<MessageSquare className="w-4 h-4" />}>
-                View Projects
-              </Button>
-              <Button variant="outline" size="sm" href="#resume" icon={<Briefcase className="w-4 h-4" />}>
-                Download CV
-              </Button>
-              <Button variant="outline" size="sm" href={`mailto:${profile.email}`} icon={<Mail className="w-4 h-4" />}>
-                Email Me
-              </Button>
-            </div>
           </div>
         </div>
       </div>

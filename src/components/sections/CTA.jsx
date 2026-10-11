@@ -1,21 +1,9 @@
-import { Mail, Download } from "lucide-react";
-import { profile } from "../../data/profile";
-import { Button } from "../ui/Button";
 import { useReveal } from "../../hooks/useReveal";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 export function CTA() {
   const reduceMotion = useReducedMotion();
   const [ref, visible] = useReveal({ threshold: 0.2 });
-
-  const handleDownloadCV = () => {
-    const link = document.createElement("a");
-    link.href = profile.cvPath;
-    link.download = "Aries_Samson_CV.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <section id="cta" className="pb-16 sm:pb-20 lg:pb-28" aria-labelledby="cta-title">
@@ -50,19 +38,10 @@ export function CTA() {
               LET&rsquo;S BUILD SOMETHING TOGETHER
             </h2>
 
-            <p className="text-ink-muted max-w-xl mx-auto mb-8 leading-relaxed">
+            <p className="text-ink-muted max-w-xl mx-auto leading-relaxed">
               Have a project in mind or a role to fill? I&rsquo;m open to freelance work and
               full-time opportunities. Let&rsquo;s talk.
             </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button variant="primary" size="lg" href={`mailto:${profile.email}`} icon={<Mail className="w-5 h-5" />}>
-                Email Me
-              </Button>
-              <Button variant="outline" size="lg" onClick={handleDownloadCV} icon={<Download className="w-5 h-5" />}>
-                Download CV
-              </Button>
-            </div>
           </div>
         </div>
       </div>
