@@ -3,7 +3,7 @@ export const profile = {
   shortName: "Aries",
   year: 2026,
   roles: ["Web Developer", "Front-End Developer", "UI Builder"],
-  location: "Bicol Region, Philippines",
+  location: "CALABARZON Region, Philippines",
   intro: "Hi, I'm Aries, a web developer who builds clean, responsive and interactive websites and web apps with React and Tailwind CSS.",
   bio: "I'm a passionate web developer based in the Bicol Region, Philippines. I enjoy turning ideas into reality through code, focusing on clean architecture and delightful user experiences. When I'm not coding, I'm exploring new technologies or refining my craft.",
   interests: ["Web Development", "UI Design", "Problem Solving", "Learning New Tech"],
