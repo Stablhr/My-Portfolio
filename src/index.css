@@ -94,6 +94,32 @@
   }
 }
 
+/* Custom scrollbar matching the theme */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-blue-bright) var(--color-surface);
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: var(--color-surface);
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-blue-bright);
+    border-radius: 4px;
+    border: 2px solid var(--color-surface);
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
+  *::-webkit-scrollbar-corner {
+    background: var(--color-surface);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
