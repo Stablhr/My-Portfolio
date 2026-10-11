@@ -124,6 +124,7 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    overscroll-behavior-x: none;
   }
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -139,6 +140,7 @@
     margin: 0;
     min-height: 100vh;
     overflow-x: hidden;
+    overscroll-behavior-y: none;
     background:
       radial-gradient(1200px 600px at 100% 0%, rgba(27,111,168,.35), transparent 60%),
       radial-gradient(900px 500px at 0% 100%, rgba(10,42,68,.55), transparent 60%),
@@ -148,6 +150,19 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  img,
+  video,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+  p,
+  li,
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: anywhere;
   }
   ::selection {
     background: var(--color-blue-bright);
@@ -167,7 +182,7 @@
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   .section {
-    @apply min-h-[100svh] flex flex-col justify-center py-16 sm:py-20 lg:py-28 scroll-mt-24;
+    @apply min-h-[100svh] py-16 sm:py-20 lg:py-28 scroll-mt-24;
   }
   .section-title {
     @apply font-heading uppercase tracking-wide leading-[0.95] text-chrome;

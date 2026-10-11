@@ -76,7 +76,7 @@ export function Home() {
                 {profile.intro}
               </p>
 
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-ink-muted mb-6">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-ink-muted mb-6 min-h-[2.5rem]">
                 <span className="text-sm">Currently:</span>
                 <span className="font-medium text-ink">{typedText}</span>
               </div>

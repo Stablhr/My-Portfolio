@@ -42,7 +42,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-line bg-surface/50" role="contentinfo">
+    <footer className="border-t border-line bg-surface/50 pb-20" role="contentinfo">
       <div className="container-main py-12 md:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12">
           <div className="space-y-5 lg:col-span-5">
@@ -116,8 +116,8 @@ export function Footer() {
         <button
           type="button"
           onClick={scrollToTop}
-          className="fixed z-40 p-3 bg-surface border border-line rounded-full text-ink-muted hover:text-ink hover:border-blue/50 transition-all duration-300 shadow-[0_20px_60px_-20px_rgba(27,111,168,.45)]"
-          style={{ bottom: "max(1.5rem, env(safe-area-inset-bottom))", right: "max(1.5rem, env(safe-area-inset-right))" }}
+          className="fixed z-40 size-11 bg-surface border border-line rounded-full text-ink-muted hover:text-ink hover:border-blue/50 transition-all duration-300 shadow-[0_20px_60px_-20px_rgba(27,111,168,.45)]"
+          style={{ bottom: "max(1rem, env(safe-area-inset-bottom))", right: "max(1rem, env(safe-area-inset-right))" }}
           aria-label="Back to top"
         >
           <ArrowUp className="w-5 h-5" aria-hidden="true" />

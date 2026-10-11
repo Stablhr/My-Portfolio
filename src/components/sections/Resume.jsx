@@ -132,22 +132,33 @@ export function Resume() {
         </div>
 
         <div className="bg-surface border border-line rounded-2xl overflow-hidden">
-          <div className="flex gap-1 bg-surface-2 border-b border-line overflow-x-auto no-scrollbar pb-1" role="tablist" aria-label="Resume sections">
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                id={`${tab.id}-tab`}
-                role="tab"
-                aria-selected={activeTab === tab.id}
-                aria-controls={tab.id}
-                tabIndex={activeTab === tab.id ? 0 : -1}
-                onClick={() => setActiveTab(tab.id)}
-                className={`pill flex-shrink-0 inline-flex items-center justify-center min-h-11 px-4 text-sm whitespace-nowrap ${activeTab === tab.id ? "pill-active" : "text-ink-muted hover:text-ink hover:bg-white/5"}`}
-              >
-                <tab.icon className="w-4 h-4 mr-2" aria-hidden="true" />
-                {tab.label}
-              </button>
-            ))}
+          <div className="bg-surface-2 border-b border-line pb-1" role="tablist" aria-label="Resume sections">
+            <div className="grid grid-cols-3 gap-1 p-1" role="tablist" aria-label="Resume sections">
+              {TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  id={`${tab.id}-tab`}
+                  role="tab"
+                  aria-selected={activeTab === tab.id}
+                  aria-controls={tab.id}
+                  tabIndex={activeTab === tab.id ? 0 : -1}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`pill inline-flex items-center justify-center min-h-11 px-2 py-2 text-[10px] sm:text-sm font-medium transition-all duration-200 ${
+                    activeTab === tab.id
+                      ? "pill-active shadow-[0_4px_14px_-4px_rgba(108,196,255,0.5)]"
+                      : "text-ink-muted hover:text-ink hover:bg-white/5"
+                  }`}
+                >
+                  <span className="flex items-center gap-1.5">
+                    <tab.icon className="w-3.5 h-3.5 hidden sm:inline-flex" aria-hidden="true" />
+                    <span className="hidden sm:inline">{tab.label}</span>
+                    <span className="sm:hidden">
+                      {tab.id === "experience" ? "Exp" : tab.id === "skills" ? "Skills" : "Certs"}
+                    </span>
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="p-4 sm:p-6 md:p-8" style={{ minHeight: "400px" }}>
@@ -166,41 +177,41 @@ export function Resume() {
 function TimelineItem({ index, title, subtitle, period, details, current, reduceMotion, visible }) {
   return (
     <div
-      className="relative flex gap-4"
+      className="relative flex gap-3 sm:gap-4"
       style={{
         animation: visible && !reduceMotion ? `reveal 700ms ease-out ${index * 100}ms forwards` : "none",
         opacity: visible || reduceMotion ? 1 : 0,
       }}
     >
-      <div className="relative flex-shrink-0 w-6 sm:w-8">
+      <div className="relative flex-shrink-0 w-5 sm:w-6">
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-line" aria-hidden="true" />
         <div
-          className={`relative w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-line flex items-center justify-center z-10 ${current ? "bg-accent border-accent" : "bg-surface border-blue-bright"}`}
+          className={`relative w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full border-2 border-line flex items-center justify-center z-10 ${current ? "bg-accent border-accent" : "bg-surface border-blue-bright"}`}
           aria-hidden="true"
         >
-          {current && <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-black" />}
+          {current && <Check className="w-1.5 h-1.5 sm:w-2 sm:h-2 text-black" />}
         </div>
       </div>
 
-      <div className="flex-1 min-w-0 pt-1 pb-6 sm:pb-4">
-        <div className="flex flex-wrap items-baseline gap-3 mb-2">
-          <h4 className="text-lg font-semibold text-ink">{title}</h4>
+      <div className="flex-1 min-w-0 pt-1 pb-4 sm:pb-4">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
+          <h4 className="text-base sm:text-lg font-semibold text-ink break-words">{title}</h4>
           {current && (
-            <span className="px-2 py-0.5 text-xs bg-accent/20 text-accent rounded-full font-medium">
+            <span className="px-2 py-0.5 text-[10px] sm:text-xs bg-accent/20 text-accent rounded-full font-medium whitespace-nowrap flex-shrink-0">
               Current
             </span>
           )}
         </div>
-        <p className="text-ink-muted mb-1">{subtitle}</p>
-        <p className="text-sm text-ink-dim flex items-center gap-1">
-          <span className="w-3 h-3" aria-hidden="true" />
+        <p className="text-sm text-ink-muted mb-1 break-words">{subtitle}</p>
+        <p className="text-xs sm:text-sm text-ink-dim flex items-center gap-1 break-words">
+          <span className="w-2.5 h-2.5" aria-hidden="true" />
           {period}
         </p>
 
         {details && details.length > 0 && (
-          <ul className="mt-3 space-y-2 pl-4" role="list">
+          <ul className="mt-3 space-y-1.5 pl-3 sm:pl-4" role="list">
             {details.map((detail, i) => (
-              <li key={i} className="text-sm text-ink-muted relative pl-2 before:content-['•'] before:absolute before:left-0 before:text-accent overflow-wrap-anywhere">
+              <li key={i} className="text-sm text-ink-muted relative pl-2 before:content-['•'] before:absolute before:left-0 before:text-accent break-words leading-relaxed">
                 {detail}
               </li>
             ))}
@@ -239,9 +250,9 @@ function SkillBar({ skill, reduceMotion, visible }) {
 
   return (
     <div ref={barRef} className="bg-surface-2 border border-line rounded-xl p-4" role="listitem">
-      <div className="flex items-center justify-between mb-3">
-        <span className="font-medium text-ink text-sm overflow-wrap-anywhere">{skill.name}</span>
-        <span className="text-sm font-medium text-blue-bright flex-shrink-0" style={{ opacity: animate ? 1 : 0 }}>
+      <div className="flex items-center justify-between gap-2 mb-3 flex-wrap">
+        <span className="font-medium text-ink text-sm break-words flex-1 min-w-0">{skill.name}</span>
+        <span className="text-sm font-medium text-blue-bright flex-shrink-0 whitespace-nowrap" style={{ opacity: animate ? 1 : 0 }}>
           {skill.level}%
         </span>
       </div>
@@ -290,9 +301,9 @@ function LanguageBar({ language, reduceMotion, visible }) {
   }, [visible, animate]);
 
   return (
-    <div ref={barRef} className="flex items-center gap-3" role="listitem">
-      <div className="w-16 sm:w-20 text-sm font-medium text-ink flex-shrink-0">{language.name}</div>
-      <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+    <div ref={barRef} className="flex items-center gap-2 sm:gap-3" role="listitem">
+      <div className="w-14 sm:w-16 text-sm font-medium text-ink flex-shrink-0 break-words">{language.name}</div>
+      <div className="flex-1 min-w-0 h-1.5 bg-white/10 rounded-full overflow-hidden">
         <div
           className="h-full rounded-full bg-gradient-to-r from-blue to-blue-bright"
           style={{
@@ -306,7 +317,7 @@ function LanguageBar({ language, reduceMotion, visible }) {
           aria-label={`${language.name} proficiency`}
         />
       </div>
-      <span className="text-sm font-medium text-blue-bright w-10 text-right flex-shrink-0" style={{ opacity: animate ? 1 : 0 }}>
+      <span className="text-sm font-medium text-blue-bright w-10 text-right flex-shrink-0 whitespace-nowrap" style={{ opacity: animate ? 1 : 0 }}>
         {language.level}%
       </span>
     </div>
