@@ -74,10 +74,6 @@ export function Projects() {
             onClose={handleCloseModal}
           />
         )}
-
-        <div className="mt-16" aria-label="Project screenshots showcase">
-          <ProjectScreenshotStrip projects={projects} reduceMotion={reduceMotion} />
-        </div>
       </div>
     </section>
   );
@@ -229,47 +225,3 @@ function ProjectModal({ project, onClose }) {
   );
 }
 
-function ProjectScreenshotStrip({ projects, reduceMotion }) {
-  const stripProjects = [...projects, ...projects];
-
-  if (reduceMotion) return null;
-
-  return (
-    <div className="overflow-hidden" aria-hidden="true">
-      <div className="flex animate-marquee pause-on-hover gap-8 px-4">
-        {stripProjects.map((project, i) => (
-          <div key={`${project.slug}-${i}`} className="flex-shrink-0 w-80">
-            <div className="aspect-[16/9] rounded-xl overflow-hidden bg-surface border border-line">
-              <SafeImage
-                src={project.image}
-                alt=""
-                initial={project.title.charAt(0)}
-                className="w-full h-full object-cover"
-                width={320}
-                height={180}
-              />
-            </div>
-            <p className="text-xs text-center mt-2 text-ink-dim font-medium">{project.title}</p>
-          </div>
-        ))}
-      </div>
-      <div className="flex animate-marquee pause-on-hover gap-8 px-4" style={{ animationDirection: "reverse", animationDuration: "40s" }}>
-        {stripProjects.map((project, i) => (
-          <div key={`${project.slug}-${i}-rev`} className="flex-shrink-0 w-80">
-            <div className="aspect-[16/9] rounded-xl overflow-hidden bg-surface border border-line">
-              <SafeImage
-                src={project.image}
-                alt=""
-                initial={project.title.charAt(0)}
-                className="w-full h-full object-cover"
-                width={320}
-                height={180}
-              />
-            </div>
-            <p className="text-xs text-center mt-2 text-ink-dim font-medium">{project.title}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
