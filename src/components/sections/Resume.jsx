@@ -132,7 +132,7 @@ export function Resume() {
         </div>
 
         <div className="bg-surface border border-line rounded-2xl overflow-hidden">
-          <div className="flex bg-surface-2 border-b border-line" role="tablist" aria-label="Resume sections">
+          <div className="flex gap-1 bg-surface-2 border-b border-line overflow-x-auto no-scrollbar pb-1" role="tablist" aria-label="Resume sections">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
@@ -142,7 +142,7 @@ export function Resume() {
                 aria-controls={tab.id}
                 tabIndex={activeTab === tab.id ? 0 : -1}
                 onClick={() => setActiveTab(tab.id)}
-                className={`pill flex-1 sm:flex-none inline-flex items-center justify-center min-h-11 px-4 sm:px-6 text-sm sm:text-base whitespace-nowrap ${activeTab === tab.id ? "pill-active" : "text-ink-muted hover:text-ink hover:bg-white/5"}`}
+                className={`pill flex-shrink-0 inline-flex items-center justify-center min-h-11 px-4 text-sm whitespace-nowrap ${activeTab === tab.id ? "pill-active" : "text-ink-muted hover:text-ink hover:bg-white/5"}`}
               >
                 <tab.icon className="w-4 h-4 mr-2" aria-hidden="true" />
                 {tab.label}
@@ -166,23 +166,23 @@ export function Resume() {
 function TimelineItem({ index, title, subtitle, period, details, current, reduceMotion, visible }) {
   return (
     <div
-      className="relative flex gap-4 sm:gap-6"
+      className="relative flex gap-4"
       style={{
         animation: visible && !reduceMotion ? `reveal 700ms ease-out ${index * 100}ms forwards` : "none",
         opacity: visible || reduceMotion ? 1 : 0,
       }}
     >
-      <div className="relative flex-shrink-0 w-8 sm:w-12">
+      <div className="relative flex-shrink-0 w-6 sm:w-8">
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-line" aria-hidden="true" />
         <div
-          className={`relative w-4 h-4 rounded-full border-2 border-line flex items-center justify-center z-10 ${current ? "bg-accent border-accent" : "bg-surface border-blue-bright"}`}
+          className={`relative w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-line flex items-center justify-center z-10 ${current ? "bg-accent border-accent" : "bg-surface border-blue-bright"}`}
           aria-hidden="true"
         >
-          {current && <Check className="w-2.5 h-2.5 text-black" />}
+          {current && <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-black" />}
         </div>
       </div>
 
-      <div className="flex-1 min-w-0 pt-1 pb-6">
+      <div className="flex-1 min-w-0 pt-1 pb-6 sm:pb-4">
         <div className="flex flex-wrap items-baseline gap-3 mb-2">
           <h4 className="text-lg font-semibold text-ink">{title}</h4>
           {current && (
@@ -238,9 +238,9 @@ function SkillBar({ skill, reduceMotion, visible }) {
   }, [visible, animate]);
 
   return (
-    <div ref={barRef} className="bg-surface-2 border border-line rounded-xl p-4 sm:p-5" role="listitem">
+    <div ref={barRef} className="bg-surface-2 border border-line rounded-xl p-4" role="listitem">
       <div className="flex items-center justify-between mb-3">
-        <span className="font-medium text-ink">{skill.name}</span>
+        <span className="font-medium text-ink text-sm">{skill.name}</span>
         <span className="text-sm font-medium text-blue-bright" style={{ opacity: animate ? 1 : 0 }}>
           {skill.level}%
         </span>
@@ -290,8 +290,8 @@ function LanguageBar({ language, reduceMotion, visible }) {
   }, [visible, animate]);
 
   return (
-    <div ref={barRef} className="flex items-center gap-4" role="listitem">
-      <div className="w-20 sm:w-24 text-sm font-medium text-ink flex-shrink-0">{language.name}</div>
+    <div ref={barRef} className="flex items-center gap-3" role="listitem">
+      <div className="w-16 sm:w-20 text-sm font-medium text-ink flex-shrink-0">{language.name}</div>
       <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
         <div
           className="h-full rounded-full bg-gradient-to-r from-blue to-blue-bright"
@@ -306,7 +306,7 @@ function LanguageBar({ language, reduceMotion, visible }) {
           aria-label={`${language.name} proficiency`}
         />
       </div>
-      <span className="text-sm font-medium text-blue-bright w-12 text-right flex-shrink-0" style={{ opacity: animate ? 1 : 0 }}>
+      <span className="text-sm font-medium text-blue-bright w-10 text-right flex-shrink-0" style={{ opacity: animate ? 1 : 0 }}>
         {language.level}%
       </span>
     </div>
@@ -316,18 +316,18 @@ function LanguageBar({ language, reduceMotion, visible }) {
 function CertificateCard({ certificate, index, reduceMotion, visible }) {
   return (
     <div
-      className="flex items-start gap-4 bg-surface-2 border border-line rounded-xl p-4 sm:p-5"
+      className="flex items-start gap-3 bg-surface-2 border border-line rounded-xl p-4"
       role="listitem"
       style={{
         animation: visible && !reduceMotion ? `reveal 700ms ease-out ${index * 80}ms forwards` : "none",
         opacity: visible || reduceMotion ? 1 : 0,
       }}
     >
-      <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center">
-        <Award className="w-5 h-5 text-accent" aria-hidden="true" />
+      <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center">
+        <Award className="w-4 h-4 text-accent" aria-hidden="true" />
       </div>
       <div className="min-w-0 pt-0.5">
-        <h4 className="font-semibold text-ink">{certificate.title}</h4>
+        <h4 className="font-semibold text-ink text-sm">{certificate.title}</h4>
         <p className="text-sm text-ink-muted mt-0.5">{certificate.issuer}</p>
         <p className="text-xs text-ink-dim uppercase tracking-wider mt-1">{certificate.date}</p>
       </div>
