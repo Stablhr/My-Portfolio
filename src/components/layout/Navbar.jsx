@@ -20,7 +20,11 @@ export function Navbar({ activeSection }) {
   const pillGroupRef = useRef(null);
   const pillRefs = useRef({});
   const reduceMotion = useReducedMotion();
+  const [hoveredId, setHoveredId] = useState(null);
   const [indicator, setIndicator] = useState({ x: 0, width: 0 });
+  // The highlight follows whichever nav item is hovered, otherwise the section
+  // currently in view.
+  const indicatorId = hoveredId || activeSection;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +43,7 @@ export function Navbar({ activeSection }) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [mobileOpen]);
 
-  // Track the active nav pill's position so the blue indicator can slide to it.
+  // Track the highlighted nav pill's position so the blue indicator can slide.
   useLayoutEffect(() => {
     const group = pillGroupRef.current;
     if (!group) return;
@@ -47,7 +51,7 @@ export function Navbar({ activeSection }) {
     let cancelled = false;
     const update = () => {
       if (cancelled) return;
-      const el = pillRefs.current[activeSection];
+      const el = pillRefs.current[indicatorId];
       if (!el) {
         setIndicator({ x: 0, width: 0 });
         return;
@@ -64,7 +68,7 @@ export function Navbar({ activeSection }) {
       cancelled = true;
       window.removeEventListener("resize", update);
     };
-  }, [activeSection]);
+  }, [indicatorId]);
 
   const handleNavClick = (href) => {
     setMobileOpen(false);
@@ -99,6 +103,7 @@ export function Navbar({ activeSection }) {
           <div className="hidden md:flex items-center gap-4">
             <div
               ref={pillGroupRef}
+              onMouseLeave={() => setHoveredId(null)}
               className="relative flex items-center gap-1 bg-white/5 backdrop-blur border border-line rounded-full px-2 py-1"
             >
               <span
@@ -118,8 +123,9 @@ export function Navbar({ activeSection }) {
                   ref={(el) => {
                     pillRefs.current[item.id] = el;
                   }}
-                  active={activeSection === item.id}
-                  className={`relative z-10 ${activeSection === item.id ? "bg-transparent text-ink" : ""}`}
+                  active={indicatorId === item.id}
+                  className={`relative z-10 ${indicatorId === item.id ? "bg-transparent text-ink" : ""}`}
+                  onMouseEnter={() => setHoveredId(item.id)}
                   onClick={() => handleNavClick(item.href)}
                 >
                   {item.label}
