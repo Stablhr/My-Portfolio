@@ -8,7 +8,6 @@ export function SafeImage({ src, alt, initial, className = "", width, height, ..
     return (
       <div
         className={`relative flex items-center justify-center bg-gradient-to-br from-blue/30 via-blue-deep to-bg overflow-hidden ${className}`}
-        style={{ width, height }}
         aria-hidden="true"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-blue/20 via-blue-deep/30 to-bg" />
@@ -20,7 +19,7 @@ export function SafeImage({ src, alt, initial, className = "", width, height, ..
   }
 
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ width, height }}>
+    <div className={`relative overflow-hidden ${className}`}>
       {isLoading && (
         <div className="absolute inset-0 bg-gradient-to-br from-blue/20 via-blue-deep/30 to-bg animate-pulse" />
       )}

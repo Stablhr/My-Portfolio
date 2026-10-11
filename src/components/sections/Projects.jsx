@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
-import { ExternalLink, X, ChevronRight, Code, Star, Zap } from "lucide-react";
+import { ExternalLink, ChevronRight, CheckCircle } from "lucide-react";
 import { projects } from "../../data/projects";
-import { Card } from "../ui/Card";
+import { profile } from "../../data/profile";
 import { SafeImage } from "../ui/SafeImage";
 import { Modal } from "../ui/Modal";
 import { Pill } from "../ui/Pill";
@@ -35,12 +35,7 @@ export function Projects() {
         <SectionTitle
           id="projects-title"
           eyebrow="RECAP PROJECT"
-          title={`${profile?.year || 2026}`}
-          className="mb-8"
-        />
-        <SectionTitle
-          eyebrow=""
-          title="RECAP PROJECT 2026"
+          title={String(profile.year)}
           className="mb-8"
         />
 

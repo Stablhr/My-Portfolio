@@ -208,6 +208,10 @@ function SkillBar({ skill, index, reduceMotion, visible }) {
   const barRef = useRef(null);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      setAnimate(true);
+      return;
+    }
     if (visible && !animate) {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -256,6 +260,10 @@ function LanguageBar({ language, index, reduceMotion, visible }) {
   const barRef = useRef(null);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      setAnimate(true);
+      return;
+    }
     if (visible && !animate) {
       const observer = new IntersectionObserver(
         (entries) => {

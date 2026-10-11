@@ -5,6 +5,10 @@ export function useScrollSpy(sectionIds, options = {}) {
   const [activeId, setActiveId] = useState(sectionIds[0] || "");
 
   useEffect(() => {
+    // IntersectionObserver is required for scroll-spy; if unavailable we simply
+    // keep the first section active instead of crashing the whole app.
+    if (typeof IntersectionObserver === "undefined") return;
+
     const observers = sectionIds.map((id) => {
       const element = document.getElementById(id);
       if (!element) return null;

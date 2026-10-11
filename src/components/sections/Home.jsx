@@ -63,14 +63,15 @@ export function Home({ onStart, onOptions, onExit }) {
   };
 
   return (
+    <>
     <section
       id="home"
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center px-4"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 md:pt-0"
       aria-labelledby="home-title"
     >
-      <div className="container-main">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="container-main w-full flex flex-1 items-center">
+        <div className="grid w-full lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div
             className="relative order-2 lg:order-1"
             style={{
@@ -162,8 +163,6 @@ export function Home({ onStart, onOptions, onExit }) {
         </div>
       </div>
 
-      <TechMarquee />
-
       <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
         aria-hidden="true"
@@ -174,5 +173,7 @@ export function Home({ onStart, onOptions, onExit }) {
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent pointer-events-none" aria-hidden="true" />
     </section>
+    <TechMarquee />
+    </>
   );
 }

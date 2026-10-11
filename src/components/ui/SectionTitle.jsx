@@ -1,4 +1,4 @@
-export function SectionTitle({ eyebrow, title, align = "center", className = "" }) {
+export function SectionTitle({ id, eyebrow, title, align = "center", className = "" }) {
   return (
     <header className={`mb-12 ${align === "center" ? "text-center" : align === "left" ? "text-left" : "text-right"} ${className}`}>
       {eyebrow && (
@@ -6,7 +6,7 @@ export function SectionTitle({ eyebrow, title, align = "center", className = "" 
           {eyebrow}
         </span>
       )}
-      <h2 className="section-title">{title}</h2>
+      <h2 id={id} className="section-title">{title}</h2>
     </header>
   );
 }
