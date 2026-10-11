@@ -7,6 +7,7 @@ import { About } from "./components/sections/About";
 import { Projects } from "./components/sections/Projects";
 import { Resume } from "./components/sections/Resume";
 import { Contact } from "./components/sections/Contact";
+import { CTA } from "./components/sections/CTA";
 
 const SECTION_IDS = ["home", "about", "projects", "resume", "contact"];
 
@@ -23,6 +24,7 @@ export default function App() {
         <Projects />
         <Resume />
         <Contact />
+        <CTA />
       </main>
       <Footer />
     </>
