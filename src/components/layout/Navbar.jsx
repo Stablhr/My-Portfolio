@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { Pill } from "../ui/Pill";
 import { Button } from "../ui/Button";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { profile } from "../../data/profile";
 
 const NAV_ITEMS = [
@@ -16,6 +17,10 @@ export function Navbar({ activeSection }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef(null);
+  const pillGroupRef = useRef(null);
+  const pillRefs = useRef({});
+  const reduceMotion = useReducedMotion();
+  const [indicator, setIndicator] = useState({ x: 0, width: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +38,33 @@ export function Navbar({ activeSection }) {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [mobileOpen]);
+
+  // Track the active nav pill's position so the blue indicator can slide to it.
+  useLayoutEffect(() => {
+    const group = pillGroupRef.current;
+    if (!group) return;
+
+    let cancelled = false;
+    const update = () => {
+      if (cancelled) return;
+      const el = pillRefs.current[activeSection];
+      if (!el) {
+        setIndicator({ x: 0, width: 0 });
+        return;
+      }
+      setIndicator({ x: el.offsetLeft, width: el.offsetWidth });
+    };
+
+    update();
+    window.addEventListener("resize", update);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(update).catch(() => {});
+    }
+    return () => {
+      cancelled = true;
+      window.removeEventListener("resize", update);
+    };
+  }, [activeSection]);
 
   const handleNavClick = (href) => {
     setMobileOpen(false);
@@ -65,11 +97,29 @@ export function Navbar({ activeSection }) {
           </a>
 
           <div className="hidden md:flex items-center gap-4">
-            <div className="flex items-center gap-1 bg-white/5 backdrop-blur border border-line rounded-full px-2 py-1">
+            <div
+              ref={pillGroupRef}
+              className="relative flex items-center gap-1 bg-white/5 backdrop-blur border border-line rounded-full px-2 py-1"
+            >
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none absolute left-0 top-1 bottom-1 rounded-full bg-blue-bright/15 ${
+                  reduceMotion ? "" : "transition-[transform,width] duration-300 ease-out"
+                }`}
+                style={{
+                  width: `${indicator.width}px`,
+                  transform: `translateX(${indicator.x}px)`,
+                  opacity: indicator.width > 0 ? 1 : 0,
+                }}
+              />
               {NAV_ITEMS.map((item) => (
                 <Pill
                   key={item.id}
+                  ref={(el) => {
+                    pillRefs.current[item.id] = el;
+                  }}
                   active={activeSection === item.id}
+                  className={`relative z-10 ${activeSection === item.id ? "bg-transparent text-ink" : ""}`}
                   onClick={() => handleNavClick(item.href)}
                 >
                   {item.label}
