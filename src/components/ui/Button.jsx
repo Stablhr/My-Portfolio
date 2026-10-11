@@ -16,7 +16,7 @@ export const Button = forwardRef(function Button({
   const baseClasses = "inline-flex items-center justify-center font-medium rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-bright focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:opacity-50 disabled:cursor-not-allowed";
   
   const variants = {
-    primary: "bg-accent text-black hover:bg-accent-hover hover:-translate-y-0.5",
+    primary: "bg-accent text-white font-semibold hover:bg-accent-hover hover:-translate-y-0.5",
     outline: "border border-line text-ink hover:border-blue/50 hover:bg-white/5",
     ghost: "text-ink-muted hover:text-ink hover:bg-white/5",
   };

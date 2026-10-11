@@ -49,7 +49,7 @@ export function Home() {
             </div>
 
             <div
-              className="order-2 text-center lg:text-left"
+              className="order-2 text-center lg:text-left relative z-10"
               style={{
                 animation: heroVisible && !reduceMotion ? "reveal 700ms ease-out 150ms forwards" : "none",
                 opacity: heroVisible || reduceMotion ? 1 : 0,
@@ -76,16 +76,16 @@ export function Home() {
                 {profile.intro}
               </p>
 
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-ink-muted mb-8">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-ink-muted mb-6">
                 <span className="text-sm">Currently:</span>
                 <span className="font-medium text-ink">{typedText}</span>
               </div>
 
-              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 w-full sm:w-auto">
+              <div className="flex justify-center lg:justify-start gap-3 w-full sm:w-auto">
                 <Button
                   variant="primary"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  className="w-full max-w-xs sm:w-auto mx-auto sm:mx-0"
                   onClick={scrollToProjects}
                   iconRight={<ArrowRight className="w-5 h-5" />}
                 >
