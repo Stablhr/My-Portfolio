@@ -5,7 +5,7 @@ export const profile = {
   roles: ["Web Developer", "Front-End Developer", "UI Builder"],
   location: "CALABARZON Region, Philippines",
   intro: "Hi, I'm Aries, a web developer who builds clean, responsive and interactive websites and web apps with React and Tailwind CSS.",
-  bio: "I'm a passionate web developer based in the Bicol Region, Philippines. I enjoy turning ideas into reality through code, focusing on clean architecture and delightful user experiences. When I'm not coding, I'm exploring new technologies or refining my craft.",
+  bio: "I'm a web developer and virtual assistant based in the Philippines. I build clean, responsive interfaces with React and Tailwind CSS, and I help businesses stay organized and grow through lead generation, admin support and more. When I'm not coding, I'm exploring new technologies or refining my craft.",
   interests: ["Web Development", "UI Design", "Problem Solving", "Learning New Tech"],
   email: "ariessamson18@gmail.com",
   socials: {

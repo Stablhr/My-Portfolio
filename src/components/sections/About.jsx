@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, Briefcase, Clock } from "lucide-react";
+import { MapPin, Briefcase, Clock, Code2, ClipboardList } from "lucide-react";
 import { useReveal } from "../../hooks/useReveal";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { profile } from "../../data/profile";
@@ -9,8 +9,25 @@ import { SectionTitle } from "../ui/SectionTitle";
 
 const QUICK_FACTS = [
   { icon: MapPin, label: "Location", value: profile.location },
-  { icon: Briefcase, label: "Focus", value: "Front-End Development" },
+  { icon: Briefcase, label: "Focus", value: "Web Dev & Virtual Assistant" },
   { icon: Clock, label: "Availability", value: "Open to opportunities" },
+];
+
+const FOCUS_AREAS = [
+  {
+    icon: Code2,
+    title: "Web Development",
+    description:
+      "Building clean, responsive interfaces with React and Tailwind CSS — from landing pages to full web apps.",
+    tags: ["React", "JavaScript", "Tailwind CSS", "Responsive Design"],
+  },
+  {
+    icon: ClipboardList,
+    title: "Virtual Assistance",
+    description:
+      "Keeping businesses organized and growing through lead generation, admin support, invoicing and social media.",
+    tags: ["Lead Generation", "Appointment Setting", "Invoicing", "Admin Tasks", "Social Media"],
+  },
 ];
 
 const INTERESTS = profile.interests;
@@ -98,8 +115,33 @@ export function About() {
               {profile.bio}
             </p>
 
+            <div className="grid sm:grid-cols-2 gap-4">
+              {FOCUS_AREAS.map((area) => (
+                <div
+                  key={area.title}
+                  className="p-5 bg-surface-2 border border-line rounded-2xl transition-colors duration-300 hover:border-blue/40"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <area.icon className="w-5 h-5 text-blue-bright" aria-hidden="true" />
+                    <h3 className="font-heading tracking-wide text-ink">{area.title}</h3>
+                  </div>
+                  <p className="text-sm text-ink-muted leading-relaxed mb-3">{area.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {area.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2 py-1 rounded-full bg-white/5 border border-line text-ink-muted"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <div>
-              <h3 className="text-label uppercase tracking-[0.2em] text-ink-muted mb-4">SKILLS</h3>
+              <h3 className="text-label uppercase tracking-[0.2em] text-ink-muted mb-4">TOOLS & TECH</h3>
               <div
                 ref={skillsRef}
                 className="flex flex-wrap gap-3"
