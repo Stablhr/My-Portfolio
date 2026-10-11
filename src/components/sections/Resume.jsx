@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Download, Briefcase, Code, Check } from "lucide-react";
+import { Download, Briefcase, Code, Award, Check } from "lucide-react";
 import { resume } from "../../data/resume";
 import { profile } from "../../data/profile";
 import { Button } from "../ui/Button";
@@ -11,6 +11,7 @@ import { Toast } from "../ui/Toast";
 const TABS = [
   { id: "experience", label: "Experience", icon: Briefcase },
   { id: "skills", label: "Skills", icon: Code },
+  { id: "certificates", label: "Certificates", icon: Award },
 ];
 
 export function Resume() {
@@ -20,6 +21,7 @@ export function Resume() {
   const [experienceRef, experienceVisible] = useReveal({ threshold: 0.1 });
   const [skillsRef, skillsVisible] = useReveal({ threshold: 0.1 });
   const [languagesRef, languagesVisible] = useReveal({ threshold: 0.1 });
+  const [certificatesRef, certificatesVisible] = useReveal({ threshold: 0.1 });
 
   const handleDownloadCV = () => {
     const link = document.createElement("a");
@@ -69,6 +71,20 @@ export function Resume() {
               </div>
             </div>
 
+            <div>
+              <h3 className="text-label uppercase tracking-[0.2em] text-ink-muted mb-6">VIRTUAL ASSISTANT SKILLS</h3>
+              <div className="grid sm:grid-cols-2 gap-4" role="list" aria-label="Virtual assistant skills">
+                {resume.vaSkills.map((skill) => (
+                  <SkillBar
+                    key={skill.name}
+                    skill={skill}
+                    reduceMotion={reduceMotion}
+                    visible={skillsVisible}
+                  />
+                ))}
+              </div>
+            </div>
+
             <div ref={languagesRef} className="pt-8 border-t border-line">
               <h3 className="text-label uppercase tracking-[0.2em] text-ink-muted mb-6">LANGUAGES</h3>
               <div className="space-y-4" role="list" aria-label="Languages">
@@ -81,6 +97,22 @@ export function Resume() {
                   />
                 ))}
               </div>
+            </div>
+          </div>
+        );
+      case "certificates":
+        return (
+          <div ref={certificatesRef} role="tabpanel" aria-labelledby="certificates-tab">
+            <div className="grid sm:grid-cols-2 gap-4" role="list" aria-label="Certificates">
+              {resume.certificates.map((certificate, i) => (
+                <CertificateCard
+                  key={i}
+                  certificate={certificate}
+                  index={i}
+                  reduceMotion={reduceMotion}
+                  visible={certificatesVisible}
+                />
+              ))}
             </div>
           </div>
         );
@@ -110,7 +142,7 @@ export function Resume() {
                 aria-controls={tab.id}
                 tabIndex={activeTab === tab.id ? 0 : -1}
                 onClick={() => setActiveTab(tab.id)}
-                className={`pill flex-1 sm:flex-none inline-flex items-center justify-center min-h-11 px-6 py-3 text-base ${activeTab === tab.id ? "pill-active" : "text-ink-muted hover:text-ink hover:bg-white/5"}`}
+                className={`pill flex-1 sm:flex-none inline-flex items-center justify-center min-h-11 px-4 sm:px-6 text-sm sm:text-base whitespace-nowrap ${activeTab === tab.id ? "pill-active" : "text-ink-muted hover:text-ink hover:bg-white/5"}`}
               >
                 <tab.icon className="w-4 h-4 mr-2" aria-hidden="true" />
                 {tab.label}
@@ -277,6 +309,28 @@ function LanguageBar({ language, reduceMotion, visible }) {
       <span className="text-sm font-medium text-blue-bright w-12 text-right flex-shrink-0" style={{ opacity: animate ? 1 : 0 }}>
         {language.level}%
       </span>
+    </div>
+  );
+}
+
+function CertificateCard({ certificate, index, reduceMotion, visible }) {
+  return (
+    <div
+      className="flex items-start gap-4 bg-surface-2 border border-line rounded-xl p-4 sm:p-5"
+      role="listitem"
+      style={{
+        animation: visible && !reduceMotion ? `reveal 700ms ease-out ${index * 80}ms forwards` : "none",
+        opacity: visible || reduceMotion ? 1 : 0,
+      }}
+    >
+      <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center">
+        <Award className="w-5 h-5 text-accent" aria-hidden="true" />
+      </div>
+      <div className="min-w-0 pt-0.5">
+        <h4 className="font-semibold text-ink">{certificate.title}</h4>
+        <p className="text-sm text-ink-muted mt-0.5">{certificate.issuer}</p>
+        <p className="text-xs text-ink-dim uppercase tracking-wider mt-1">{certificate.date}</p>
+      </div>
     </div>
   );
 }
