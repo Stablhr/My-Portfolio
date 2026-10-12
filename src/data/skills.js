@@ -17,9 +17,9 @@ function VSCodeIcon({ className, style }) {
 
 export const skills = [
   { name: "React", icon: SiReact, color: "#61DAFB" },
-  { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
+  { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
   { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-  { name: "Express.js", icon: SiExpress, color: "#000000" },
+  { name: "Express.js", icon: SiExpress, color: "#FFFFFF" },
   { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
   { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
   { name: "CSS3", icon: SiCss, color: "#1572B6" },
