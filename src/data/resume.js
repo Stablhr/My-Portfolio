@@ -57,7 +57,9 @@ export const resume = {
   ],
   skills: [
     { name: "React", level: 85 },
+    { name: "Next.js", level: 80 },
     { name: "JavaScript (ES6+)", level: 80 },
+    { name: "Express.js", level: 75 },
     { name: "Tailwind CSS", level: 90 },
     { name: "HTML5 & CSS3", level: 95 },
     { name: "Git & GitHub", level: 85 },

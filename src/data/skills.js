@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { SiReact, SiJavascript, SiTailwindcss, SiHtml5, SiCss, SiGit, SiGithub, SiVercel, SiVite, SiFigma, SiMongodb, SiSupabase } from "react-icons/si";
+import { SiReact, SiJavascript, SiTailwindcss, SiHtml5, SiCss, SiGit, SiGithub, SiVercel, SiVite, SiFigma, SiMongodb, SiSupabase, SiNextdotjs, SiExpress } from "react-icons/si";
 
 // react-icons v5 no longer ships an official VS Code glyph (only VSCodium,
 // which is a different editor), so the official #007ACC logo is served from
@@ -17,7 +17,9 @@ function VSCodeIcon({ className, style }) {
 
 export const skills = [
   { name: "React", icon: SiReact, color: "#61DAFB" },
+  { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
   { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+  { name: "Express.js", icon: SiExpress, color: "#000000" },
   { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
   { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
   { name: "CSS3", icon: SiCss, color: "#1572B6" },
