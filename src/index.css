@@ -123,7 +123,6 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
     overscroll-behavior-x: none;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -139,7 +138,7 @@
   body {
     margin: 0;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: clip;
     overscroll-behavior-y: none;
     background:
       radial-gradient(1200px 600px at 100% 0%, rgba(27,111,168,.35), transparent 60%),
