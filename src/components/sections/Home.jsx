@@ -62,13 +62,13 @@ export function Home() {
 
               <h1
                 id="home-title"
-                className="font-heading text-chrome leading-[0.95] tracking-wide mb-4"
-                style={{ fontSize: "clamp(3rem, 8vw, 9rem)" }}
+                className="font-heading text-chrome leading-[0.95] tracking-wide mb-4 whitespace-nowrap overflow-hidden"
+                style={{ fontSize: "clamp(2.5rem, 10vw, 9rem)" }}
               >
                 PORTFOLIO
               </h1>
 
-              <p className="font-heading text-outlined text-ink-muted tracking-wide mb-8" style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)" }}>
+              <p className="font-heading text-outlined text-ink-muted tracking-wide mb-8 whitespace-nowrap overflow-hidden" style={{ fontSize: "clamp(1.25rem, 5vw, 3rem)" }}>
                 {profile.year}
               </p>
 
