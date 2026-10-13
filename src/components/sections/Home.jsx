@@ -60,15 +60,43 @@ export function Home() {
                 WEB DEVELOPER
               </span>
 
-              <h1
-                id="home-title"
-                className="font-heading text-chrome leading-[0.95] tracking-wide mb-4 whitespace-nowrap overflow-hidden"
-                style={{ fontSize: "clamp(2.5rem, 10vw, 9rem)" }}
-              >
-                PORTFOLIO
+              <h1 id="home-title" className="mb-4 w-full" aria-label="PORTFOLIO">
+                {/*
+                  Rendered as SVG so the word always scales to the width of its
+                  own grid column instead of the viewport. The old clamp() sizing
+                  overflowed (and clipped the final "O") on mid-size screens where
+                  the 2-column grid narrows the text column, and on devices whose
+                  fallback font is wider than Anton. `textLength` forces an exact
+                  fit on every device, so nothing is ever cut off.
+                */}
+                <svg
+                  viewBox="0 0 760 128"
+                  className="w-full h-auto overflow-visible"
+                  role="img"
+                  aria-hidden="true"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <defs>
+                    <linearGradient id="portfolioChrome" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="50%" stopColor="#a7b0bd" />
+                      <stop offset="100%" stopColor="#6b7685" />
+                    </linearGradient>
+                  </defs>
+                  <text
+                    x="0"
+                    y="116"
+                    textLength="760"
+                    lengthAdjust="spacingAndGlyphs"
+                    fill="url(#portfolioChrome)"
+                    style={{ fontFamily: "var(--font-heading)", fontSize: "150px", letterSpacing: "0.01em" }}
+                  >
+                    PORTFOLIO
+                  </text>
+                </svg>
               </h1>
 
-              <p className="font-heading text-outlined text-ink-muted tracking-wide mb-8 whitespace-nowrap overflow-hidden" style={{ fontSize: "clamp(1.25rem, 5vw, 3rem)" }}>
+              <p className="font-heading text-outlined text-ink-muted tracking-wide mb-8 whitespace-nowrap" style={{ fontSize: "clamp(1rem, 6vw, 3rem)", maxWidth: "100%" }}>
                 {profile.year}
               </p>
 
