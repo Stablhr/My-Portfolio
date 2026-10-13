@@ -116,7 +116,7 @@ export function Footer() {
         <button
           type="button"
           onClick={scrollToTop}
-          className="fixed z-40 size-11 bg-surface border border-line rounded-full text-ink-muted hover:text-ink hover:border-blue/50 transition-all duration-300 shadow-[0_20px_60px_-20px_rgba(27,111,168,.45)]"
+          className="fixed z-40 inline-flex items-center justify-center size-11 bg-surface border border-line rounded-full text-ink-muted hover:text-ink hover:border-blue/50 transition-all duration-300 shadow-[0_20px_60px_-20px_rgba(27,111,168,.45)]"
           style={{ bottom: "max(1rem, env(safe-area-inset-bottom))", right: "max(1rem, env(safe-area-inset-right))" }}
           aria-label="Back to top"
         >
